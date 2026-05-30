@@ -2446,7 +2446,7 @@ Game.Launch=function()
 		
 		Game.externalDataLoaded=false;
 		
-		Game.grandmaNames=['Granny','Gusher','Ethel','Edna','Doris','Maud','Hilda','Gladys','Michelle','Michele','Phyllis','Millicent','Muriel','Myrtle','Mildred','Mavis','Helen','Gloria','Sheila','Betty','Gertrude','Agatha','Beryl','Agnes','Pearl','Precious','Ruby','Vera','Bonnie','Ada','Bunny','Cookie','Darling','Gaga','GamGam','Memaw','Mimsy','Peanut','Nana','Nan','Tootsie','Warty','Stinky','Heinous'];
+		Game.grandmaNames=['Ellie', 'Cecilia', 'Yan Tong', 'Cleo', 'Jules', 'Jenny', 'Isabelle', 'Romy', 'Chloe', 'Almas', 'Agam', 'Justin'];
 		Game.customGrandmaNames=[];
 		Game.heralds=0;
 		
@@ -3909,12 +3909,12 @@ Game.Launch=function()
 		Game.HCfactor=3.5;
 		Game.HowMuchPrestige=function(cookies)//how much prestige [cookies] should land you
 		{
-			return Math.pow(cookies/10000000,1/Game.HCfactor);
+			return Math.pow(cookies/50000000,1/Game.HCfactor);
 		}
 		Game.HowManyCookiesReset=function(chips)//how many cookies [chips] are worth
 		{
 			//this must be the inverse of the above function (ie. if cookies=chips^2, chips=cookies^(1/2) )
-			return Math.pow(chips,Game.HCfactor)*10000000;
+			return Math.pow(chips,Game.HCfactor)*50000000;
 		}
 		Game.gainedPrestige=0;
 		Game.EarnHeavenlyChips=function(cookiesForfeited,silent)
@@ -5447,14 +5447,15 @@ Game.Launch=function()
 					if (me.wrath>0 || Math.random()<0.25) list.push('clot','multiply cookies','ruin cookies');
 					else list.push('frenzy','multiply cookies');
 					if (me.wrath>0 && Game.hasGod && Game.hasGod('scorn')) list.push('clot','ruin cookies','clot','ruin cookies');
-					if (me.wrath>0 && Math.random()<0.3) list.push('blood frenzy','chain cookie','cookie storm');
-					else if (Math.random()<0.2 && Game.cookiesEarned>=10000) list.push('chain cookie','cookie storm');
+					if (me.wrath>0 && Math.random()<0.1) list.push('blood frenzy','chain cookie','cookie storm');
+					else if (Math.random()<0.03 && Game.cookiesEarned>=100000) list.push('chain cookie','cookie storm');
 					if (Math.random()<0.05 && Game.season=='fools') list.push('everything must go');
-					if (Math.random()<0.5) list.push('click frenzy');
-					if (Math.random()<0.2) list.push('cursed finger');
+					if (Math.random()<0.15) list.push('click frenzy');
+					if (Math.random()<0.35) list.push('long frenzy');
+					if (Math.random()<0.3) list.push('cursed finger');
 					
 					if (Game.BuildingsOwned>=10 && Math.random()<0.25) list.push('building special');
-					
+				
 					if (Game.canLumps() && Math.random()<0.0005) list.push('free sugar lump');
 					
 					if ((me.wrath==0 && Math.random()<0.15) || Math.random()<0.05)
@@ -5513,7 +5514,7 @@ Game.Launch=function()
 					
 					if (choice=='building special')
 					{
-						var time=Math.ceil(20*effectDurMod);
+						var time=Math.ceil(30*effectDurMod);
 						var list=[];
 						for (var i in Game.Objects)
 						{
@@ -5542,7 +5543,11 @@ Game.Launch=function()
 					}
 					else if (choice=='frenzy')
 					{
-						buff=Game.gainBuff('frenzy',Math.ceil(30*effectDurMod),13);
+						buff=Game.gainBuff('frenzy',Math.ceil(50*effectDurMod),13);
+					}
+					else if (choice=='long frenzy')
+					{
+						buff=Game.gainBuff('long frenzy',Math.ceil(350*effectDurMod),2);
 					}
 					else if (choice=='dragon harvest')
 					{
@@ -5554,13 +5559,13 @@ Game.Launch=function()
 					}
 					else if (choice=='multiply cookies')
 					{
-						var moni=mult*Math.min(Game.cookies*15,Game.cookiesPs*60*4)+13;//add 1500% to cookies owned (+13), or 4 minutes of cookie production - whichever is lowest
+						var moni=mult*Math.min(Game.cookies*20,Game.cookiesPs*60*8)+13;//add 2000% to cookies owned (+13), or 8 minutes of cookie production - whichever is lowest
 						Game.Earn(moni);
 						popup=loc("Lucky!")+'<br><small>'+loc("+%1!",loc("%1 cookie",LBeautify(moni)))+'</small>';
 					}
 					else if (choice=='ruin cookies')
 					{
-						var moni=Math.min(Game.cookies*0.20,Game.cookiesPs*60*3)+13;//lose 20% of cookies owned (-13), or 3 minutes of cookie production - whichever is lowest
+						var moni=Math.min(Game.cookies*0.50,Game.cookiesPs*60*5)+13;//lose 50% of cookies owned (-13), or 5 minutes of cookie production - whichever is lowest
 						moni=Math.min(Game.cookies,moni);
 						Game.Spend(moni);
 						popup=loc("Ruin!")+'<br><small>'+loc("Lost %1!",loc("%1 cookie",LBeautify(moni)))+'</small>';
@@ -5579,7 +5584,7 @@ Game.Launch=function()
 					}
 					else if (choice=='click frenzy')
 					{
-						buff=Game.gainBuff('click frenzy',Math.ceil(30*effectDurMod),67);
+						buff=Game.gainBuff('click frenzy',Math.ceil(50*effectDurMod),67);
 					}
 					else if (choice=='dragonflight')
 					{
@@ -5677,7 +5682,7 @@ Game.Launch=function()
 				maxTime:0,
 				getTimeMod:function(me,m)
 				{
-					m /= 6;
+					m /= 3;
 					if (Game.Has('Lucky day')) m/=1.5;
 					if (Game.Has('Serendipity')) m/=1.5;
 					if (Game.Has('Golden goose egg')) m*=0.95;
@@ -5867,6 +5872,7 @@ Game.Launch=function()
 		
 		Game.goldenCookieChoices=[
 			"Frenzy","frenzy",
+			"Endurance Frenzy","long frenzy",
 			"Lucky","multiply cookies",
 			"Ruin","ruin cookies",
 			"Elder frenzy","blood frenzy",
@@ -6966,63 +6972,7 @@ Game.Launch=function()
 		Game.getNewTicker=function(manual)//note : "manual" is true if the ticker was clicked, but may also be true on startup etc
 		{
 			var list=[];
-			list.push(choose([
-				"News : why love someone if you can't have them?",
-				'News : calculus is love, calculus is life!',
-				'News : now I am become death, the destroyer of worlds!',
-				'News : someone lied in april. Not sure who though, yet.',
-				'News : who needs girls when you have cookies?',
-				'News : news looks like this',
-				"Imagine a rock, moving through deep space. There are no stars or planets. If there's nothing to compare the rock to, is it even moving?",
-			]));
-			list.push(choose([
-				"News : why love someone if you can't have them?",
-				'News : calculus is love, calculus is life!',
-				'News : now I am become death, the destroyer of worlds!',
-				'News : someone lied in april. Not sure who though, yet.',
-				'News : who needs girls when you have cookies?',
-				'News : news looks like this',
-				"Imagine a rock, moving through deep space. There are no stars or planets. If there's nothing to compare the rock to, is it even moving?",
-			]));
-			list.push(choose([
-				"News : why love someone if you can't have them?",
-				'News : calculus is love, calculus is life!',
-				'News : now I am become death, the destroyer of worlds!',
-				'News : someone lied in april. Not sure who though, yet.',
-				'News : who needs girls when you have cookies?',
-				'News : news looks like this',
-				"Imagine a rock, moving through deep space. There are no stars or planets. If there's nothing to compare the rock to, is it even moving?",
-			]));
-			list.push(choose([
-			    'News : cookies are temporary, high grades are forever.',
-			    'News : i came, i saw, i forgot what i was doing.',
-			    'News : if at first you do not succeed, reload the save.',
-			    'News : every bug is a feature waiting for better marketing.',
-			    'News : the voices in my head just requested more cookies.',
-			    'News : reality is overrated anyway.',
-			    'News : there are only 10 kinds of people in the world.',
-			    'News : sleep is just a free trial of death.',
-			    'News : trust me, i did the maths. The maths disagreed.',
-			    'News : somewhere, a calculator is having an existential crisis.',
-			    'News : touching grass remains under investigation.',
-			    'News : i survived another day without reading the manual.',
-			    'News : every masterpiece starts with "surely this will work".',
-			    'News : if nobody sees the mistake, was it really a mistake?',
-			    'News : the cake was a lie, but the cookies are real.',
-			    'News : procrastination speedrun world record shattered again.',
-			    'News : intelligence is knowing calculus. Wisdom is avoiding it.',
-			    'News : one must imagine the cookie clicker happy.',
-			    'News : my source is that i made it up.',
-			    'News : local cookie refuses to be eaten, cites human rights.',
-			    'News : error 404: girls not found.',
-			    'News : the odds were against me. I ignored them.',
-			    'News : everything is a graph if you label the axes.',
-			    'News : i asked the universe for answers. It left me on read.',
-			    'News : scientifically speaking, more cookies is better.',
-			    'News : achievements are just expensive dopamine.',
-			    'News : i fear no man. But that segmentation fault scares me.',
-			    'News : remember: every corpse on mount everest was once motivated.',
-			]));
+			
 			var NEWS=loc("News :").replace(' ','&nbsp;')+' ';
 			
 			if (Game.TickerN%2==0 || Game.cookiesEarned>=10100000000)
@@ -7057,6 +7007,30 @@ Game.Launch=function()
 					}
 					else
 					{
+						list.push(choose([
+						"News : why love someone if you can't have them?",
+						'News : calculus is love, calculus is life!',
+						'News : now I am become death, the destroyer of worlds!',
+						'News : someone lied in april. Not sure who though, yet.',
+						'News : who needs girls when you have cookies?',
+						'News : news looks like this',
+						]));
+						list.push(choose([
+						"News : why love someone if you can't have them?",
+						'News : calculus is love, calculus is life!',
+						'News : now I am become death, the destroyer of worlds!',
+						'News : someone lied in april. Not sure who though, yet.',
+						'News : who needs girls when you have cookies?',
+						'News : news looks like this',
+						]));
+						list.push(choose([
+						"News : why love someone if you can't have them?",
+						'News : calculus is love, calculus is life!',
+						'News : now I am become death, the destroyer of worlds!',
+						'News : someone lied in april. Not sure who though, yet.',
+						'News : who needs girls when you have cookies?',
+						'News : news looks like this',
+						]));
 						if (Game.Objects['Farm'].amount>0) list.push(choose([
 						'News : cookie farms suspected of employing undeclared elderly workforce!',
 						'News : cookie farms release harmful chocolate in our rivers, says scientist!',
@@ -9487,7 +9461,7 @@ Game.Launch=function()
 			1:{name:'Plain',unlock:1,achievUnlock:1,iconRow:0,color:'#ccb3ac',price:					5},
 			2:{name:'Berrylium',unlock:5,achievUnlock:50,iconRow:1,color:'#ff89e7',price:				25},
 			3:{name:'Blueberrylium',unlock:25,achievUnlock:100,iconRow:2,color:'#00deff',price:			125},
-			4:{name:'Chalcedhoney',unlock:50,achievUnlock:150,iconRow:13,color:'#ffcc2f',price:			500},
+			4:{name:'Chalcedhoney',unlock:50,achievUnlock:150,iconRow:13,color:'#ffcc2f',price:			1000},
 			5:{name:'Buttergold',unlock:100,achievUnlock:200,iconRow:14,color:'#e9d673',price:			50000},
 			6:{name:'Sugarmuck',unlock:150,achievUnlock:250,iconRow:15,color:'#a8bf91',price:			5000000},
 			7:{name:'Jetmint',unlock:200,achievUnlock:300,iconRow:16,color:'#60ff50',price:				5000000000},
@@ -9662,18 +9636,18 @@ Game.Launch=function()
 		new Game.Upgrade('Kitten workers',strKittenDesc+'<q>meow meow meow meow</q>',9000000000,Game.GetIcon('Kitten',2));Game.last.kitten=1;Game.MakeTiered(Game.last,2,18);
 		
 		order=10000;
-		Game.NewUpgradeCookie({name:'Plain cookies',desc:'We all gotta start somewhere.',icon:[2,3],power:										1,	price:	999999});
-		Game.NewUpgradeCookie({name:'Sugar cookies',desc:'Tasty, if a little unimaginative.',icon:[7,3],power:									1,	price:	999999*5});
-		Game.NewUpgradeCookie({name:'Oatmeal raisin cookies',desc:'No raisin to hate these.',icon:[0,3],power:									1,	price:	9999999});
-		Game.NewUpgradeCookie({name:'Peanut butter cookies',desc:'Get yourself some jam cookies!',icon:[1,3],power:								2,	price:	9999999*5});
-		Game.NewUpgradeCookie({name:'Coconut cookies',desc:'Flaky, but not unreliable. Some people go crazy for these.',icon:[3,3],power:		2,	price:	99999999});
+		Game.NewUpgradeCookie({name:'Plain cookies',desc:'We all gotta start somewhere.',icon:[2,3],power:										1,	price:	9999});
+		Game.NewUpgradeCookie({name:'Sugar cookies',desc:'Tasty, if a little unimaginative.',icon:[7,3],power:									1,	price:	9999*5});
+		Game.NewUpgradeCookie({name:'Oatmeal raisin cookies',desc:'No raisin to hate these.',icon:[0,3],power:									1,	price:	99999});
+		Game.NewUpgradeCookie({name:'Peanut butter cookies',desc:'Get yourself some jam cookies!',icon:[1,3],power:								2,	price:	99999*5});
+		Game.NewUpgradeCookie({name:'Coconut cookies',desc:'Flaky, but not unreliable. Some people go crazy for these.',icon:[3,3],power:		2,	price:	999999});
 		order=10001;
 		Game.NewUpgradeCookie({name:'White chocolate cookies',desc:'I know what you\'ll say. It\'s just cocoa butter! It\'s not real chocolate!<br>Oh please.',icon:[4,3],power:2,	price:	99999999*5});
 		order=10000;
-		Game.NewUpgradeCookie({name:'Macadamia nut cookies',desc:'They\'re macadamn delicious!',icon:[5,3],power:								2,	price:	99999999});
+		Game.NewUpgradeCookie({name:'Macadamia nut cookies',desc:'They\'re macadamn delicious!',icon:[5,3],power:								2,	price:	9999999});
 		order=10002;
-		Game.NewUpgradeCookie({name:'Double-chip cookies',desc:'DOUBLE THE CHIPS<br>DOUBLE THE TASTY<br>(double the calories)',icon:[6,3],power:2,	price:	999999999*5});
-		Game.NewUpgradeCookie({name:'White chocolate macadamia nut cookies',desc:'Orteil\'s favorite.',icon:[8,3],power:						2,	price:	9999999999});
+		Game.NewUpgradeCookie({name:'Double-chip cookies',desc:'DOUBLE THE CHIPS<br>DOUBLE THE TASTY<br>(double the calories)',icon:[6,3],power:2,	price:	99999999*5});
+		Game.NewUpgradeCookie({name:'White chocolate macadamia nut cookies',desc:'Orteil\'s favorite.',icon:[8,3],power:						2,	price:	999999999});
 		Game.NewUpgradeCookie({name:'All-chocolate cookies',desc:'CHOCOVERDOSE.',icon:[9,3],power:												2,	price:	9999999999*5});
 		
 		order=100;
@@ -9689,8 +9663,8 @@ Game.Launch=function()
 		order=900;Game.TieredUpgrade('Causality enforcer','<q>What happened, happened.</q>','Time machine',4);
 		
 		order=5000;
-		new Game.Upgrade('Lucky day',loc("Golden cookies appear <b>twice as often</b> and stay <b>twice as long</b>.")+'<q>Oh hey, a four-leaf penny!</q>',777777777,[27,6]);
-		new Game.Upgrade('Serendipity',loc("Golden cookies appear <b>twice as often</b> and stay <b>twice as long</b>.")+'<q>What joy! Seven horseshoes!</q>',77777777777,[27,6]);
+		new Game.Upgrade('Lucky day',loc("Golden cookies appear <b>twice as often</b> and stay <b>twice as long</b>.")+'<q>Oh hey, a four-leaf penny!</q>',77777777,[27,6]);
+		new Game.Upgrade('Serendipity',loc("Golden cookies appear <b>twice as often</b> and stay <b>twice as long</b>.")+'<q>What joy! Seven horseshoes!</q>',7777777777,[27,6]);
 		
 		order=20000;
 		new Game.Upgrade('Kitten engineers',strKittenDesc+'<q>meow meow meow meow, sir</q>',90000000000000,Game.GetIcon('Kitten',3));Game.last.kitten=1;Game.MakeTiered(Game.last,3,18);
@@ -9736,20 +9710,20 @@ Game.Launch=function()
 			}
 		}
 		
-		new Game.Upgrade('Bingo center/Research facility',loc("Grandma-operated science lab and leisure club.<br>Grandmas are <b>4 times</b> as efficient.<br><b>Regularly unlocks new upgrades</b>.")+'<q>What could possibly keep those grandmothers in check?...<br>Bingo.</q>',1000000000000000,[11,9],function(){Game.SetResearch('Specialized chocolate chips');});Game.last.noPerm=1;
+		new Game.Upgrade('Bingo center/Research facility',loc("Grandma-operated science lab and leisure club.<br>Grandmas are <b>4 times</b> as efficient.<br><b>Regularly unlocks new upgrades</b>.")+'<q>What could possibly keep those grandmothers in check?...<br>Bingo.</q>',100000000000,[11,9],function(){Game.SetResearch('Specialized chocolate chips');});Game.last.noPerm=1;
 		
 		order=15000;
-		new Game.Upgrade('Specialized chocolate chips',getStrCookieProductionMultiplierPlus(1)+'<q>Computer-designed chocolate chips. Computer chips, if you will.</q>',1000000000000000,[0,9],function(){Game.SetResearch('Designer cocoa beans');});Game.last.pool='tech';
-		new Game.Upgrade('Designer cocoa beans',getStrCookieProductionMultiplierPlus(2)+'<q>Now more aerodynamic than ever!</q>',2000000000000000,[1,9],function(){Game.SetResearch('Ritual rolling pins');});Game.last.pool='tech';
-		new Game.Upgrade('Ritual rolling pins',loc("%1 are <b>twice</b> as efficient.",cap(Game.Objects['Grandma'].plural))+'<q>The result of years of scientific research!</q>',4000000000000000,[2,9],function(){Game.SetResearch('Underworld ovens');});Game.last.pool='tech';
-		new Game.Upgrade('Underworld ovens',getStrCookieProductionMultiplierPlus(3)+'<q>Powered by science, of course!</q>',8000000000000000,[3,9],function(){Game.SetResearch('One mind');});Game.last.pool='tech';
-		new Game.Upgrade('One mind',loc("Each %1 gains <b>+%2 base CpS per %3</b>.",[loc("grandma"),'0.0<span></span>2',loc("grandma")])+'<div class="warning">'+loc("Note: the grandmothers are growing restless. Do not encourage them.")+'</div><q>We are one. We are many.</q>',16000000000000000,[4,9],function(){Game.elderWrath=1;Game.SetResearch('Exotic nuts');Game.storeToRefresh=1;});Game.last.pool='tech';
+		new Game.Upgrade('Specialized chocolate chips',getStrCookieProductionMultiplierPlus(1)+'<q>Computer-designed chocolate chips. Computer chips, if you will.</q>',100000000000,[0,9],function(){Game.SetResearch('Designer cocoa beans');});Game.last.pool='tech';
+		new Game.Upgrade('Designer cocoa beans',getStrCookieProductionMultiplierPlus(2)+'<q>Now more aerodynamic than ever!</q>',200000000000,[1,9],function(){Game.SetResearch('Ritual rolling pins');});Game.last.pool='tech';
+		new Game.Upgrade('Ritual rolling pins',loc("%1 are <b>twice</b> as efficient.",cap(Game.Objects['Grandma'].plural))+'<q>The result of years of scientific research!</q>',400000000000,[2,9],function(){Game.SetResearch('Underworld ovens');});Game.last.pool='tech';
+		new Game.Upgrade('Underworld ovens',getStrCookieProductionMultiplierPlus(3)+'<q>Powered by science, of course!</q>',800000000000,[3,9],function(){Game.SetResearch('One mind');});Game.last.pool='tech';
+		new Game.Upgrade('One mind',loc("Each %1 gains <b>+%2 base CpS per %3</b>.",[loc("grandma"),'0.0<span></span>2',loc("grandma")])+'<div class="warning">'+loc("Note: the grandmothers are growing restless. Do not encourage them.")+'</div><q>We are one. We are many.</q>',1600000000000,[4,9],function(){Game.elderWrath=1;Game.SetResearch('Exotic nuts');Game.storeToRefresh=1;});Game.last.pool='tech';
 		//Game.last.clickFunction=function(){return confirm('Warning : purchasing this will have unexpected, and potentially undesirable results!\nIt\'s all downhill from here. You have been warned!\nPurchase anyway?');};
 		Game.RequiresConfirmation(Game.last,'<div class="block">'+loc("<b>Warning:</b> purchasing this will have unexpected, and potentially undesirable results!<br><small>It's all downhill from here. You have been warned!</small><br><br>Purchase anyway?")+'</div>');
-		new Game.Upgrade('Exotic nuts',getStrCookieProductionMultiplierPlus(4)+'<q>You\'ll go crazy over these!</q>',32000000000000000,[5,9],function(){Game.SetResearch('Communal brainsweep');});Game.last.pool='tech';
-		new Game.Upgrade('Communal brainsweep',(EN?'Each grandma gains another <b>+0.0<span></span>2 base CpS per grandma</b>.':loc("Each %1 gains <b>+%2 base CpS per %3</b>.",[loc("grandma"),'0.0<span></span>2',loc("grandma")]))+'<div class="warning">'+loc("Note: proceeding any further in scientific research may have unexpected results. You have been warned.")+'</div><q>We fuse. We merge. We grow.</q>',64000000000000000,[6,9],function(){Game.elderWrath=2;Game.SetResearch('Arcane sugar');Game.storeToRefresh=1;});Game.last.pool='tech';
-		new Game.Upgrade('Arcane sugar',getStrCookieProductionMultiplierPlus(5)+'<q>Tastes like insects, ligaments, and molasses.</q>',128000000000000000,[7,9],function(){Game.SetResearch('Elder Pact');});Game.last.pool='tech';
-		new Game.Upgrade('Elder Pact',loc("Each %1 gains <b>+%2 base CpS per %3</b>.",[loc("grandma"),'0.0<span></span>5',loc("portal")])+'<div class="warning">'+loc("Note: this is a bad idea.")+'</div><q>squirm crawl slither writhe<br>today we rise</q>',256000000000000000,[8,9],function(){Game.elderWrath=3;Game.storeToRefresh=1;});Game.last.pool='tech';
+		new Game.Upgrade('Exotic nuts',getStrCookieProductionMultiplierPlus(4)+'<q>You\'ll go crazy over these!</q>',3200000000000,[5,9],function(){Game.SetResearch('Communal brainsweep');});Game.last.pool='tech';
+		new Game.Upgrade('Communal brainsweep',(EN?'Each grandma gains another <b>+0.0<span></span>2 base CpS per grandma</b>.':loc("Each %1 gains <b>+%2 base CpS per %3</b>.",[loc("grandma"),'0.0<span></span>2',loc("grandma")]))+'<div class="warning">'+loc("Note: proceeding any further in scientific research may have unexpected results. You have been warned.")+'</div><q>We fuse. We merge. We grow.</q>',6400000000000,[6,9],function(){Game.elderWrath=2;Game.SetResearch('Arcane sugar');Game.storeToRefresh=1;});Game.last.pool='tech';
+		new Game.Upgrade('Arcane sugar',getStrCookieProductionMultiplierPlus(5)+'<q>Tastes like insects, ligaments, and molasses.</q>',12800000000000,[7,9],function(){Game.SetResearch('Elder Pact');});Game.last.pool='tech';
+		new Game.Upgrade('Elder Pact',loc("Each %1 gains <b>+%2 base CpS per %3</b>.",[loc("grandma"),'0.0<span></span>5',loc("portal")])+'<div class="warning">'+loc("Note: this is a bad idea.")+'</div><q>squirm crawl slither writhe<br>today we rise</q>',25600000000000,[8,9],function(){Game.elderWrath=3;Game.storeToRefresh=1;});Game.last.pool='tech';
 		new Game.Upgrade('Elder Pledge',loc("Contains the wrath of the elders, at least for a while.")+'<q>This is a simple ritual involving anti-aging cream, cookie batter mixed in the moonlight, and a live chicken.</q>',1,[9,9],function()
 		{
 			Game.elderWrath=0;
@@ -13011,6 +12985,18 @@ Game.Launch=function()
 		*/
 		
 		//base buffs
+		new Game.buffType('long frenzy',function(time,pow)
+		{
+			return {
+				name:'Endurance Frenzy',
+				desc:loc("Cookie production x%1 for %2!",[pow,Game.sayTime(time*Game.fps,-1)]),
+				icon:[10,14],
+				time:time*Game.fps,
+				add:true,
+				multCpS:pow,
+				aura:1
+			};
+		});
 		new Game.buffType('frenzy',function(time,pow)
 		{
 			return {
