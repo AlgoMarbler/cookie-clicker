@@ -2508,8 +2508,8 @@ Game.Launch=function()
 			Game.attachTooltip(l('topbarMerch'),'<div style="padding:8px;width:250px;text-align:center;">Cookie Clicker shirts, hoodies and stickers!</div>','this');
 			Game.attachTooltip(l('topbarMobileCC'),'<div style="padding:8px;width:250px;text-align:center;">Play Cookie Clicker on your phone!<br>(Android only; iOS version will be released later)</div>','this');
 			Game.attachTooltip(l('topbarSteamCC'),'<div style="padding:8px;width:250px;text-align:center;">Get Cookie Clicker on Steam!<br>Featuring music by C418.</div>','this');
-			Game.attachTooltip(l('topbarRandomgen'),'<div style="padding:8px;width:250px;text-align:center;">A thing we made that lets you write random generators.</div>','this');
-			Game.attachTooltip(l('topbarIGM'),'<div style="padding:8px;width:250px;text-align:center;">A thing we made that lets you create your own idle games using a simple scripting language.</div>','this');
+			Game.attachTooltip(l('topbarRandomgen'),'<div style="padding:8px;width:250px;text-align:center;">Check for updates!<br>{Current Version: 1.1.0}</div>','this');
+			Game.attachTooltip(l('topbarIGM'),'<div style="padding:8px;width:250px;text-align:center;">Go and check out the creator of this downloadable version!<br>(Subscribe while your at it. :)</div>','this');
 			l('changeLanguage').innerHTML=loc("Change language");
 			l('links').childNodes[0].nodeValue=loc("Other versions");
 			//l('linkVersionBeta').innerHTML=loc("Beta");
@@ -3906,15 +3906,15 @@ Game.Launch=function()
 		PRESTIGE
 		=======================================================================================*/
 		
-		Game.HCfactor=3;
+		Game.HCfactor=3.5;
 		Game.HowMuchPrestige=function(cookies)//how much prestige [cookies] should land you
 		{
-			return Math.pow(cookies/1000000000000,1/Game.HCfactor);
+			return Math.pow(cookies/10000000,1/Game.HCfactor);
 		}
 		Game.HowManyCookiesReset=function(chips)//how many cookies [chips] are worth
 		{
 			//this must be the inverse of the above function (ie. if cookies=chips^2, chips=cookies^(1/2) )
-			return Math.pow(chips,Game.HCfactor)*1000000000000;
+			return Math.pow(chips,Game.HCfactor)*10000000;
 		}
 		Game.gainedPrestige=0;
 		Game.EarnHeavenlyChips=function(cookiesForfeited,silent)
@@ -4556,10 +4556,10 @@ Game.Launch=function()
 			loop=randomFloor(loop);
 			for (var i=0;i<loop;i++)
 			{
-				if (Math.random()<(Game.Has('Sucralosia Inutilis')?0.15:0.1)) types.push(1);//bifurcated
-				if (Math.random()<3/1000) types.push(2);//golden
-				if (Math.random()<0.1*Game.elderWrath) types.push(3);//meaty
-				if (Math.random()<1/50) types.push(4);//caramelized
+				if (Math.random()<(Game.Has('Sucralosia Inutilis')?0.75:0.5)) types.push(1);//bifurcated
+				if (Math.random()<0.1) types.push(2);//golden
+				if (Math.random()<0.3*Game.elderWrath) types.push(3);//meaty
+				if (Math.random()<0.25) types.push(4);//caramelized
 			}
 			Game.lumpCurrentType=choose(types);
 			Math.seedrandom();
@@ -5444,14 +5444,14 @@ Game.Launch=function()
 					
 					//select an effect
 					var list=[];
-					if (me.wrath>0) list.push('clot','multiply cookies','ruin cookies');
+					if (me.wrath>0 || Math.random()<0.25) list.push('clot','multiply cookies','ruin cookies');
 					else list.push('frenzy','multiply cookies');
 					if (me.wrath>0 && Game.hasGod && Game.hasGod('scorn')) list.push('clot','ruin cookies','clot','ruin cookies');
 					if (me.wrath>0 && Math.random()<0.3) list.push('blood frenzy','chain cookie','cookie storm');
 					else if (Math.random()<0.03 && Game.cookiesEarned>=100000) list.push('chain cookie','cookie storm');
 					if (Math.random()<0.05 && Game.season=='fools') list.push('everything must go');
-					if (Math.random()<0.1 && (Math.random()<0.05 || !Game.hasBuff('Dragonflight'))) list.push('click frenzy');
-					if (me.wrath && Math.random()<0.1) list.push('cursed finger');
+					if (Math.random()<0.65) list.push('click frenzy');
+					if (Math.random()<0.3) list.push('cursed finger');
 					
 					if (Game.BuildingsOwned>=10 && Math.random()<0.25) list.push('building special');
 					
@@ -5542,7 +5542,7 @@ Game.Launch=function()
 					}
 					else if (choice=='frenzy')
 					{
-						buff=Game.gainBuff('frenzy',Math.ceil(77*effectDurMod),7);
+						buff=Game.gainBuff('frenzy',Math.ceil(50*effectDurMod),13);
 					}
 					else if (choice=='dragon harvest')
 					{
@@ -5554,13 +5554,13 @@ Game.Launch=function()
 					}
 					else if (choice=='multiply cookies')
 					{
-						var moni=mult*Math.min(Game.cookies*0.15,Game.cookiesPs*60*15)+13;//add 15% to cookies owned (+13), or 15 minutes of cookie production - whichever is lowest
+						var moni=mult*Math.min(Game.cookies*20,Game.cookiesPs*60*8)+13;//add 2000% to cookies owned (+13), or 8 minutes of cookie production - whichever is lowest
 						Game.Earn(moni);
 						popup=loc("Lucky!")+'<br><small>'+loc("+%1!",loc("%1 cookie",LBeautify(moni)))+'</small>';
 					}
 					else if (choice=='ruin cookies')
 					{
-						var moni=Math.min(Game.cookies*0.05,Game.cookiesPs*60*10)+13;//lose 5% of cookies owned (-13), or 10 minutes of cookie production - whichever is lowest
+						var moni=Math.min(Game.cookies*0.50,Game.cookiesPs*60*5)+13;//lose 50% of cookies owned (-13), or 5 minutes of cookie production - whichever is lowest
 						moni=Math.min(Game.cookies,moni);
 						Game.Spend(moni);
 						popup=loc("Ruin!")+'<br><small>'+loc("Lost %1!",loc("%1 cookie",LBeautify(moni)))+'</small>';
@@ -5571,7 +5571,7 @@ Game.Launch=function()
 					}
 					else if (choice=='clot')
 					{
-						buff=Game.gainBuff('clot',Math.ceil(66*effectDurMod),0.5);
+						buff=Game.gainBuff('clot',Math.ceil(180*effectDurMod),0.5);
 					}
 					else if (choice=='cursed finger')
 					{
@@ -5579,7 +5579,7 @@ Game.Launch=function()
 					}
 					else if (choice=='click frenzy')
 					{
-						buff=Game.gainBuff('click frenzy',Math.ceil(13*effectDurMod),777);
+						buff=Game.gainBuff('click frenzy',Math.ceil(50*effectDurMod),67);
 					}
 					else if (choice=='dragonflight')
 					{
@@ -5600,7 +5600,7 @@ Game.Launch=function()
 						this.totalFromChain+=moni;
 
 						//break the chain if we're above 5 digits AND it's more than 50% of our bank, it grants more than 6 hours of our CpS, or just a 1% chance each digit (update : removed digit limit)
-						if (Math.random()<0.01 || nextMoni>=maxPayout)
+						if (nextMoni>=maxPayout)
 						{
 							this.chain=0;
 							popup=loc("Cookie chain")+'<br><small>'+loc("+%1!",loc("%1 cookie",LBeautify(moni)))+'<br>'+loc("Cookie chain over. You made %1.",loc("%1 cookie",LBeautify(this.totalFromChain)))+'</small>';
@@ -5677,8 +5677,9 @@ Game.Launch=function()
 				maxTime:0,
 				getTimeMod:function(me,m)
 				{
-					if (Game.Has('Lucky day')) m/=2;
-					if (Game.Has('Serendipity')) m/=2;
+					m /= 3;
+					if (Game.Has('Lucky day')) m/=1.5;
+					if (Game.Has('Serendipity')) m/=1.5;
 					if (Game.Has('Golden goose egg')) m*=0.95;
 					if (Game.Has('Heavenly luck')) m*=0.95;
 					if (Game.Has('Green yeast digestives')) m*=0.99;
@@ -7000,6 +7001,30 @@ Game.Launch=function()
 					}
 					else
 					{
+						list.push(choose([
+						"News : why love someone if you can't have them?",
+						'News : calculus is love, calculus is life!',
+						'News : now I am become death, the destroyer of worlds!',
+						'News : someone lied in april. Not sure who though, yet.',
+						'News : who needs girls when you have cookies?',
+						'News : news looks like this',
+						]));
+						list.push(choose([
+						"News : why love someone if you can't have them?",
+						'News : calculus is love, calculus is life!',
+						'News : now I am become death, the destroyer of worlds!',
+						'News : someone lied in april. Not sure who though, yet.',
+						'News : who needs girls when you have cookies?',
+						'News : news looks like this',
+						]));
+						list.push(choose([
+						"News : why love someone if you can't have them?",
+						'News : calculus is love, calculus is life!',
+						'News : now I am become death, the destroyer of worlds!',
+						'News : someone lied in april. Not sure who though, yet.',
+						'News : who needs girls when you have cookies?',
+						'News : news looks like this',
+						]));
 						if (Game.Objects['Farm'].amount>0) list.push(choose([
 						'News : cookie farms suspected of employing undeclared elderly workforce!',
 						'News : cookie farms release harmful chocolate in our rivers, says scientist!',
@@ -9427,20 +9452,20 @@ Game.Launch=function()
 		//each building has several upgrade tiers
 		//all upgrades in the same tier have the same color, unlock threshold and price multiplier
 		Game.Tiers={
-			1:{name:'Plain',unlock:1,achievUnlock:1,iconRow:0,color:'#ccb3ac',price:					10},
-			2:{name:'Berrylium',unlock:5,achievUnlock:50,iconRow:1,color:'#ff89e7',price:				50},
-			3:{name:'Blueberrylium',unlock:25,achievUnlock:100,iconRow:2,color:'#00deff',price:			500},
-			4:{name:'Chalcedhoney',unlock:50,achievUnlock:150,iconRow:13,color:'#ffcc2f',price:			50000},
-			5:{name:'Buttergold',unlock:100,achievUnlock:200,iconRow:14,color:'#e9d673',price:			5000000},
-			6:{name:'Sugarmuck',unlock:150,achievUnlock:250,iconRow:15,color:'#a8bf91',price:			500000000},
-			7:{name:'Jetmint',unlock:200,achievUnlock:300,iconRow:16,color:'#60ff50',price:				500000000000},
-			8:{name:'Cherrysilver',unlock:250,achievUnlock:350,iconRow:17,color:'#f01700',price:		500000000000000},
-			9:{name:'Hazelrald',unlock:300,achievUnlock:400,iconRow:18,color:'#9ab834',price:			500000000000000000},
-			10:{name:'Mooncandy',unlock:350,achievUnlock:450,iconRow:19,color:'#7e7ab9',price:			500000000000000000000},
-			11:{name:'Astrofudge',unlock:400,achievUnlock:500,iconRow:28,color:'#9a3316',price:			5000000000000000000000000},
-			12:{name:'Alabascream',unlock:450,achievUnlock:550,iconRow:30,color:'#c1a88c',price:		50000000000000000000000000000},
-			13:{name:'Iridyum',unlock:500,achievUnlock:600,iconRow:31,color:'#adb1b3',price:			500000000000000000000000000000000},
-			14:{name:'Glucosmium',unlock:550,achievUnlock:650,iconRow:34,color:'#ff89e7',price:			5000000000000000000000000000000000000},
+			1:{name:'Plain',unlock:1,achievUnlock:1,iconRow:0,color:'#ccb3ac',price:					5},
+			2:{name:'Berrylium',unlock:5,achievUnlock:50,iconRow:1,color:'#ff89e7',price:				25},
+			3:{name:'Blueberrylium',unlock:25,achievUnlock:100,iconRow:2,color:'#00deff',price:			125},
+			4:{name:'Chalcedhoney',unlock:50,achievUnlock:150,iconRow:13,color:'#ffcc2f',price:			500},
+			5:{name:'Buttergold',unlock:100,achievUnlock:200,iconRow:14,color:'#e9d673',price:			50000},
+			6:{name:'Sugarmuck',unlock:150,achievUnlock:250,iconRow:15,color:'#a8bf91',price:			5000000},
+			7:{name:'Jetmint',unlock:200,achievUnlock:300,iconRow:16,color:'#60ff50',price:				5000000000},
+			8:{name:'Cherrysilver',unlock:250,achievUnlock:350,iconRow:17,color:'#f01700',price:		5000000000000},
+			9:{name:'Hazelrald',unlock:300,achievUnlock:400,iconRow:18,color:'#9ab834',price:			5000000000000000},
+			10:{name:'Mooncandy',unlock:350,achievUnlock:450,iconRow:19,color:'#7e7ab9',price:			5000000000000000000},
+			11:{name:'Astrofudge',unlock:400,achievUnlock:500,iconRow:28,color:'#9a3316',price:			50000000000000000000000},
+			12:{name:'Alabascream',unlock:450,achievUnlock:550,iconRow:30,color:'#c1a88c',price:		500000000000000000000000000},
+			13:{name:'Iridyum',unlock:500,achievUnlock:600,iconRow:31,color:'#adb1b3',price:			5000000000000000000000000000000},
+			14:{name:'Glucosmium',unlock:550,achievUnlock:650,iconRow:34,color:'#ff89e7',price:			50000000000000000000000000000000000},
 			'synergy1':{name:'Synergy I',unlock:15,iconRow:20,color:'#008595',special:1,req:'Synergies Vol. I',price:			200000},
 			'synergy2':{name:'Synergy II',unlock:75,iconRow:29,color:'#008595',special:1,req:'Synergies Vol. II',price:			200000000000},
 			'fortune':{name:'Fortune',unlock:-1,iconRow:32,color:'#9ab834',special:1,price:				77777777777777777777777777777},
