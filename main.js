@@ -3906,15 +3906,15 @@ Game.Launch=function()
 		PRESTIGE
 		=======================================================================================*/
 		
-		Game.HCfactor=3;
+		Game.HCfactor=3.5;
 		Game.HowMuchPrestige=function(cookies)//how much prestige [cookies] should land you
 		{
-			return Math.pow(cookies/1000000000000,1/Game.HCfactor);
+			return Math.pow(cookies/10000000,1/Game.HCfactor);
 		}
 		Game.HowManyCookiesReset=function(chips)//how many cookies [chips] are worth
 		{
 			//this must be the inverse of the above function (ie. if cookies=chips^2, chips=cookies^(1/2) )
-			return Math.pow(chips,Game.HCfactor)*1000000000000;
+			return Math.pow(chips,Game.HCfactor)*10000000;
 		}
 		Game.gainedPrestige=0;
 		Game.EarnHeavenlyChips=function(cookiesForfeited,silent)
@@ -4556,10 +4556,10 @@ Game.Launch=function()
 			loop=randomFloor(loop);
 			for (var i=0;i<loop;i++)
 			{
-				if (Math.random()<(Game.Has('Sucralosia Inutilis')?0.15:0.1)) types.push(1);//bifurcated
-				if (Math.random()<3/1000) types.push(2);//golden
-				if (Math.random()<0.1*Game.elderWrath) types.push(3);//meaty
-				if (Math.random()<1/50) types.push(4);//caramelized
+				if (Math.random()<(Game.Has('Sucralosia Inutilis')?0.75:0.5)) types.push(1);//bifurcated
+				if (Math.random()<0.1) types.push(2);//golden
+				if (Math.random()<0.3*Game.elderWrath) types.push(3);//meaty
+				if (Math.random()<0.25) types.push(4);//caramelized
 			}
 			Game.lumpCurrentType=choose(types);
 			Math.seedrandom();
@@ -7001,6 +7001,30 @@ Game.Launch=function()
 					}
 					else
 					{
+						list.push(choose([
+						"News : why love someone if you can't have them?",
+						'News : calculus is love, calculus is life!',
+						'News : now I am become death, the destroyer of worlds!',
+						'News : someone lied in april. Not sure who though, yet.',
+						'News : who needs girls when you have cookies?',
+						'News : news looks like this',
+						]));
+						list.push(choose([
+						"News : why love someone if you can't have them?",
+						'News : calculus is love, calculus is life!',
+						'News : now I am become death, the destroyer of worlds!',
+						'News : someone lied in april. Not sure who though, yet.',
+						'News : who needs girls when you have cookies?',
+						'News : news looks like this',
+						]));
+						list.push(choose([
+						"News : why love someone if you can't have them?",
+						'News : calculus is love, calculus is life!',
+						'News : now I am become death, the destroyer of worlds!',
+						'News : someone lied in april. Not sure who though, yet.',
+						'News : who needs girls when you have cookies?',
+						'News : news looks like this',
+						]));
 						if (Game.Objects['Farm'].amount>0) list.push(choose([
 						'News : cookie farms suspected of employing undeclared elderly workforce!',
 						'News : cookie farms release harmful chocolate in our rivers, says scientist!',
