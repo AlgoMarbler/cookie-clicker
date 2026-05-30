@@ -12,14 +12,14 @@ M.launch=function()
 		M.spells={
 			'conjure baked goods':{
 				name:'Conjure Baked Goods',
-				desc:'Summon half an hour worth of your CpS, capped at 15% of your cookies owned.',
-				failDesc:'Trigger a 15-minute clot and lose 15 minutes of CpS.',
+				desc:'Summon 10 minutes worth of your CpS, capped at 50% of your cookies owned.',
+				failDesc:'Trigger a 10-minute clot and lose 10 minutes of CpS.',
 				icon:[21,11],
-				costMin:2,
-				costPercent:0.4,
+				costMin:3,
+				costPercent:0.2,
 				win:function()
 				{
-					var val=Math.max(7,Math.min(Game.cookies*0.15,Game.cookiesPs*60*30));
+					var val=Math.max(7,Math.min(Game.cookies*0.5,Game.cookiesPs*60*10));
 					Game.Earn(val);
 					Game.Notify('Conjure baked goods!','You magic <b>'+Beautify(val)+' cookie'+(val==1?'':'s')+'</b> out of thin air.',[21,11],6);
 					Game.Popup('<div style="font-size:80%;">+'+Beautify(val)+' cookie'+(val==1?'':'s')+'!</div>',Game.mouseX,Game.mouseY);
@@ -36,14 +36,14 @@ M.launch=function()
 			},
 			'hand of fate':{
 				name:'Force the Hand of Fate',
-				desc:'Summon a random golden cookie. Each existing golden cookie makes this spell +15% more likely to backfire.',
+				desc:'Summon a random golden cookie. Each existing golden cookie makes this spell +10% more likely to backfire.',
 				failDesc:'Summon an unlucky wrath cookie.',
 				icon:[22,11],
 				costMin:10,
-				costPercent:0.6,
+				costPercent:0.4,
 				failFunc:function(fail)
 				{
-					return fail+0.15*Game.shimmerTypes['golden'].n;
+					return fail+0.1*Game.shimmerTypes['golden'].n;
 				},
 				win:function()
 				{
@@ -55,7 +55,7 @@ M.launch=function()
 					if (Game.BuildingsOwned>=10 && Math.random()<0.25) choices.push('building special');
 					//if (Math.random()<0.2) choices.push('clot','cursed finger','ruin cookies');
 					if (Math.random()<0.15) choices=['cookie storm drop'];
-					if (Math.random()<0.0001) choices.push('free sugar lump');
+					if (Math.random()<0.05) choices.push('free sugar lump');
 					newShimmer.force=choose(choices);
 					if (newShimmer.force=='cookie storm drop')
 					{
@@ -80,7 +80,7 @@ M.launch=function()
 				desc:'All active buffs gain 10% more time (up to 5 more minutes).',
 				failDesc:'All active buffs are shortened by 20% (up to 10 minutes shorter).',
 				icon:[23,11],
-				costMin:8,
+				costMin:5,
 				costPercent:0.2,
 				win:function()
 				{
@@ -116,8 +116,8 @@ M.launch=function()
 				desc:'The spell picks a random building you could afford if you had twice your current cookies, and gives it to you for free. The building selected must be under 400, and cannot be your most-built one (unless it is your only one).',
 				failDesc:'Lose a random building.',
 				icon:[24,11],
-				costMin:20,
-				costPercent:0.75,
+				costMin:15,
+				costPercent:0.55,
 				win:function()
 				{
 					var buildings=[];
@@ -151,7 +151,7 @@ M.launch=function()
 				desc:'Upgrades are 2% cheaper for 1 minute.',
 				failDesc:'Upgrades are 2% more expensive for an hour.<q>What\'s that spell? Loadsamoney!</q>',
 				icon:[25,11],
-				costMin:10,
+				costMin:8,
 				costPercent:0.1,
 				win:function()
 				{
@@ -171,7 +171,7 @@ M.launch=function()
 				desc:'Buildings are 2% cheaper for 1 minute.',
 				failDesc:'Buildings are 2% more expensive for an hour.',
 				icon:[26,11],
-				costMin:10,
+				costMin:6,
 				costPercent:0.2,
 				win:function()
 				{
@@ -190,7 +190,7 @@ M.launch=function()
 				name:'Gambler\'s Fever Dream',
 				desc:'Cast a random spell at half the magic cost, with twice the chance of backfiring.',
 				icon:[27,11],
-				costMin:3,
+				costMin:2,
 				costPercent:0.05,
 				win:function()
 				{
@@ -220,8 +220,8 @@ M.launch=function()
 				desc:'Instantly summon a wrinkler if conditions are fulfilled.',
 				failDesc:'Pop one of your wrinklers.',
 				icon:[28,11],
-				costMin:20,
-				costPercent:0.1,
+				costMin:12,
+				costPercent:0.15,
 				win:function()
 				{
 					var out=Game.SpawnWrinkler();
@@ -237,10 +237,10 @@ M.launch=function()
 			},
 			'diminish ineptitude':{
 				name:'Diminish Ineptitude',
-				desc:'Spells backfire 10 times less for the next 5 minutes.',
-				failDesc:'Spells backfire 5 times more for the next 10 minutes.',
+				desc:'Spells do not for the next 5 minutes.',
+				failDesc:'Spells always backfire for the next 10 minutes.',
 				icon:[29,11],
-				costMin:5,
+				costMin:3,
 				costPercent:0.2,
 				win:function()
 				{
@@ -288,8 +288,8 @@ M.launch=function()
 		
 		M.getFailChance=function(spell)
 		{
-			var failChance=0.15;
-			if (Game.hasBuff('Magic adept')) failChance*=0.1;
+			var failChance=0.2;
+			if (Game.hasBuff('Magic adept')) failChance*=0;
 			if (Game.hasBuff('Magic inept')) failChance*=5;
 			if (spell.failFunc) failChance=spell.failFunc(failChance);
 			return failChance;
