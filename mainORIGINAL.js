@@ -5448,10 +5448,10 @@ Game.Launch=function()
 					else list.push('frenzy','multiply cookies');
 					if (me.wrath>0 && Game.hasGod && Game.hasGod('scorn')) list.push('clot','ruin cookies','clot','ruin cookies');
 					if (me.wrath>0 && Math.random()<0.3) list.push('blood frenzy','chain cookie','cookie storm');
-					else if (Math.random()<0.03 && Game.cookiesEarned>=100000) list.push('chain cookie','cookie storm');
+					else if (Math.random()<0.2 && Game.cookiesEarned>=10000) list.push('chain cookie','cookie storm');
 					if (Math.random()<0.05 && Game.season=='fools') list.push('everything must go');
-					if (Math.random()<0.65) list.push('click frenzy');
-					if (Math.random()<0.3) list.push('cursed finger');
+					if (Math.random()<0.5) list.push('click frenzy');
+					if (Math.random()<0.2) list.push('cursed finger');
 					
 					if (Game.BuildingsOwned>=10 && Math.random()<0.25) list.push('building special');
 					
@@ -5513,7 +5513,7 @@ Game.Launch=function()
 					
 					if (choice=='building special')
 					{
-						var time=Math.ceil(30*effectDurMod);
+						var time=Math.ceil(20*effectDurMod);
 						var list=[];
 						for (var i in Game.Objects)
 						{
@@ -5542,7 +5542,7 @@ Game.Launch=function()
 					}
 					else if (choice=='frenzy')
 					{
-						buff=Game.gainBuff('frenzy',Math.ceil(50*effectDurMod),13);
+						buff=Game.gainBuff('frenzy',Math.ceil(30*effectDurMod),13);
 					}
 					else if (choice=='dragon harvest')
 					{
@@ -5554,13 +5554,13 @@ Game.Launch=function()
 					}
 					else if (choice=='multiply cookies')
 					{
-						var moni=mult*Math.min(Game.cookies*20,Game.cookiesPs*60*8)+13;//add 2000% to cookies owned (+13), or 8 minutes of cookie production - whichever is lowest
+						var moni=mult*Math.min(Game.cookies*15,Game.cookiesPs*60*4)+13;//add 1500% to cookies owned (+13), or 4 minutes of cookie production - whichever is lowest
 						Game.Earn(moni);
 						popup=loc("Lucky!")+'<br><small>'+loc("+%1!",loc("%1 cookie",LBeautify(moni)))+'</small>';
 					}
 					else if (choice=='ruin cookies')
 					{
-						var moni=Math.min(Game.cookies*0.50,Game.cookiesPs*60*5)+13;//lose 50% of cookies owned (-13), or 5 minutes of cookie production - whichever is lowest
+						var moni=Math.min(Game.cookies*0.20,Game.cookiesPs*60*3)+13;//lose 20% of cookies owned (-13), or 3 minutes of cookie production - whichever is lowest
 						moni=Math.min(Game.cookies,moni);
 						Game.Spend(moni);
 						popup=loc("Ruin!")+'<br><small>'+loc("Lost %1!",loc("%1 cookie",LBeautify(moni)))+'</small>';
@@ -5579,7 +5579,7 @@ Game.Launch=function()
 					}
 					else if (choice=='click frenzy')
 					{
-						buff=Game.gainBuff('click frenzy',Math.ceil(50*effectDurMod),67);
+						buff=Game.gainBuff('click frenzy',Math.ceil(30*effectDurMod),67);
 					}
 					else if (choice=='dragonflight')
 					{
@@ -5677,7 +5677,7 @@ Game.Launch=function()
 				maxTime:0,
 				getTimeMod:function(me,m)
 				{
-					m /= 3;
+					m /= 6;
 					if (Game.Has('Lucky day')) m/=1.5;
 					if (Game.Has('Serendipity')) m/=1.5;
 					if (Game.Has('Golden goose egg')) m*=0.95;
