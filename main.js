@@ -13078,12 +13078,12 @@ Game.Launch=function()
 			if (Game.Has('Dragon fang')) pow=Math.ceil(pow*1.1);
 			return {
 				name:'Dragon Essence',
-				desc:loc("Cookie production and clicking power x%1 for %2!",[pow,Game.sayTime(time*Game.fps,-1)]),
+				desc:"Cookie production and clicking power x"+pow+" for "+Game.sayTime(time*Game.fps,-1)+"!",
 				icon:[10,25],
 				time:time*Game.fps,
 				add:true,
 				multCpS:pow,
-				// multClick:pow,
+				multClick:pow,
 				aura:1
 			};
 		});
