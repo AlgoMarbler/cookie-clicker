@@ -1,4 +1,4 @@
-﻿/*
+/*
 All this code is copyright Orteil, 2013-2022.
 	-with some help, advice and fixes by Nicholas Laux, Debugbro, Opti, the folks at Playsaurus, and lots of people on reddit, Discord, and the DashNet forums
 	-also includes a bunch of snippets found on stackoverflow.com and others
@@ -5562,7 +5562,7 @@ Game.Launch=function()
 					}
 					else if (choice=='dragon essence')
 					{
-						buff=Game.gainBuff('dragon essence',Math.ceil(900*effectDurMod),1.75);
+						buff=Game.gainBuff('dragon essence',Math.ceil(13*effectDurMod),25);
 					}
 					else if (choice=='everything must go')
 					{
@@ -13077,12 +13077,13 @@ Game.Launch=function()
 		{
 			if (Game.Has('Dragon fang')) pow=Math.ceil(pow*1.1);
 			return {
-				name:'Dragon Harvest',
-				desc:"Cookie production +"+((pow-1)*100)+"% for "+Game.sayTime(time*Game.fps,-1)+"!",
+				name:'Dragon Essence',
+				desc:"Cookie production and clicking power x"+pow+" for "+Game.sayTime(time*Game.fps,-1)+"!",
 				icon:[10,25],
 				time:time*Game.fps,
 				add:true,
 				multCpS:pow,
+				multClick:pow,
 				aura:1
 			};
 		});
