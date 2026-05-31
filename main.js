@@ -13083,7 +13083,7 @@ Game.Launch=function()
 				time:time*Game.fps,
 				add:true,
 				multCpS:pow,
-				multClick:pow,
+				// multClick:pow,
 				aura:1
 			};
 		});
