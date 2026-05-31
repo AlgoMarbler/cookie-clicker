@@ -57,6 +57,7 @@ M.launch=function()
 					//if (Math.random()<0.2) choices.push('clot','cursed finger','ruin cookies');
 					if (Math.random()<0.15) choices=['cookie storm drop'];
 					if (Math.random()<0.05) choices.push('free sugar lump');
+					if (Math.random()<0.4) list.push('dragon essence');
 					newShimmer.force=choose(choices);
 					if (newShimmer.force=='cookie storm drop')
 					{
@@ -70,8 +71,10 @@ M.launch=function()
 					var choices=[];
 					choices.push('clot','ruin cookies');
 					if (Math.random()<0.1) choices.push('cursed finger','blood frenzy');
-					if (Math.random()<0.003) choices.push('free sugar lump');
+					if (Math.random()<0.25) choices.push('long frenzy', 'supercharge');
+					if (Math.random()<0.13) choices.push('free sugar lump');
 					if (Math.random()<0.1) choices=['blab'];
+					if (Math.random()<0.2) list.push('dragon essence');
 					newShimmer.force=choose(choices);
 					Game.Popup('<div style="font-size:80%;">Backfire!<br>Sinister fate!</div>',Game.mouseX,Game.mouseY);
 				},
