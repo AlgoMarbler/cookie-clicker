@@ -5539,7 +5539,7 @@ Game.Launch=function()
 					}
 					else if (choice=='frenzy')
 					{
-						buff=Game.gainBuff('frenzy',Math.ceil(37*effectDurMod),13);
+						buff=Game.gainBuff('frenzy',Math.ceil(66*effectDurMod),6);
 					}
 					else if (choice=='long frenzy')
 					{
