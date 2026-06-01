@@ -2439,7 +2439,7 @@ Game.Launch=function()
 		
 		Game.externalDataLoaded=false;
 		
-		Game.grandmaNames=['Ellie', 'Cecilia', 'Yan Tong', 'Cleo', 'Jules', 'Jenny', 'Isabelle', 'Romy', 'Chloe', 'Almas', 'Agam', 'Justin'];
+		Game.grandmaNames=['Ellie'];
 		Game.customGrandmaNames=[];
 		Game.heralds=0;
 		
