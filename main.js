@@ -7041,6 +7041,30 @@ Game.Launch=function()
 						'News : who needs girls when you have cookies?',
 						'News : news looks like this',
 						]));
+						list.push(choose([
+						"Once you meet someone, you never really forget them. It just takes a while for your memory to come back to you.",
+						"Once you meet someone, you never really forget them. It just takes a while for your memory to come back to you.",
+						"Once you meet someone, you never really forget them. It just takes a while for your memory to come back to you.",
+						"Once you meet someone, you never really forget them. It just takes a while for your memory to come back to you.",
+						"Promise? I promise.",
+						"Promise? I promise.",
+						"Promise? I promise.",
+						]));
+						list.push(choose([
+						"Once you meet someone, you never really forget them. It just takes a while for your memory to come back to you.",
+						"Once you meet someone, you never really forget them. It just takes a while for your memory to come back to you.",
+						"Once you meet someone, you never really forget them. It just takes a while for your memory to come back to you.",
+						"Once you meet someone, you never really forget them. It just takes a while for your memory to come back to you.",
+						"Promise? I promise.",
+						"Promise? I promise.",
+						"Promise? I promise.",
+						]));
+						list.push(choose([
+						"Why love someone... if you can't have them?",
+						"I miss you...",
+						"News: overweight boy consumes too many cookies, dies.",
+						"We rise."
+						]));
 						if (Game.Objects['Farm'].amount>0) list.push(choose([
 						'News : cookie farms suspected of employing undeclared elderly workforce!',
 						'News : cookie farms release harmful chocolate in our rivers, says scientist!',
