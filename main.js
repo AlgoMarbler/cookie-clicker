@@ -7065,6 +7065,13 @@ Game.Launch=function()
 						"News: overweight boy consumes too many cookies, dies.",
 						"We rise."
 						]));
+						list.push(choose([
+						"Why love someone... if you can't have them?",
+						"I miss you...",
+						"News: overweight boy consumes too many cookies, dies.",
+						"We rise.",
+						"Hospitals record balls shaped like your cookies.",
+						]));
 						if (Game.Objects['Farm'].amount>0) list.push(choose([
 						'News : cookie farms suspected of employing undeclared elderly workforce!',
 						'News : cookie farms release harmful chocolate in our rivers, says scientist!',
