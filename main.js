@@ -14857,7 +14857,7 @@ Game.Launch=function()
 						if (!Game.Toy)
 						{
 							Game.toys=[];
-							Game.toysType=choose([1,2]);
+							Game.toysType=2;
 							Game.Toy=function(x,y)
 							{
 								this.id=Game.toys.length;
@@ -15129,9 +15129,12 @@ Game.Launch=function()
 			str+='<a class="option neato" '+Game.clickStr+'="Game.cookies/=10;Game.cookiesEarned/=10;">/10</a><br>';
 			str+='<a class="option neato" '+Game.clickStr+'="Game.cookies*=1000;Game.cookiesEarned*=1000;">x1k</a>';
 			str+='<a class="option neato" '+Game.clickStr+'="Game.cookies/=1000;Game.cookiesEarned/=1000;">/1k</a><br>';
+			str+='<a class="option neato" '+Game.clickStr+'="Game.cookies*=1000000;Game.cookiesEarned*=1000000;">x1M</a>';
+			str+='<a class="option neato" '+Game.clickStr+'="Game.cookies/=1000000;Game.cookiesEarned/=1000000;">/1M</a><br>';
 			str+='<a class="option neato" '+Game.clickStr+'="for (var i in Game.Objects){Game.Objects[i].buy(100);}">Buy 100 of all</a>';//for (var n=0;n<100;n++){for (var i in Game.Objects){Game.Objects[i].buy(1);}}
 			str+='<a class="option neato" '+Game.clickStr+'="for (var i in Game.Objects){Game.Objects[i].sell(100);}">Sell 100 of all</a><br>';
 			str+='<a class="option neato" '+Game.clickStr+'="Game.gainLumps(10);">+10 lumps</a>';
+			str+='<a class="option neato" '+Game.clickStr+'="Game.gainLumps(7777777);">+7777777 lumps</a>';
 			str+='<a class="option neato" '+Game.clickStr+'="for (var i in Game.Objects){Game.Objects[i].level=0;Game.Objects[i].onMinigame=false;Game.Objects[i].refresh();}Game.recalculateGains=1;">Reset levels</a>';
 			str+='<a class="option neato" '+Game.clickStr+'="Game.cookiesReset+=Game.HowManyCookiesReset((Game.heavenlyChips||1)*1000);Game.EarnHeavenlyChips(0,true);Game.recalculateGains=1;">HC x1k</a>';
 			str+='<a class="option neato" '+Game.clickStr+'="Game.cookiesReset=(Game.heavenlyChips<100?0:Game.HowManyCookiesReset(Math.floor(Game.heavenlyChips*0.001)));Game.cookiesReset=Math.max(Game.cookiesReset,0);Game.EarnHeavenlyChips(0,true);if (Game.cookiesReset<=0){Game.heavenlyChips=0;}Game.recalculateGains=1;">HC /1k</a><br>';//wee bit inaccurate
