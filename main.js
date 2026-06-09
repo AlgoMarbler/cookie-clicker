@@ -5637,11 +5637,11 @@ Game.Launch=function()
 						var str=EN?(choose([
 						'Cookie crumbliness x3 for 60 seconds!',
 						'Chocolatiness x7 for 77 seconds!',
-						'She didn't ghost you, she is just pondering how to respond.',
+						"She didn't ghost you, she is just pondering how to respond.",
 						'Let her go already...',
 						'Golden cookie shininess doubled for 3 seconds!',
-						'She's thinking about you <3',
-						'She'll text back eventually.',
+						"She's thinking about you <3",
+						"She'll text back eventually.",
 						'Thanks for clicking!',
 						'You wish you clicked with her like how you clicked this cookie.',
 						'Golden cookies clicked +1!',
@@ -6984,7 +6984,68 @@ Game.Launch=function()
 		Game.getNewTicker=function(manual)//note : "manual" is true if the ticker was clicked, but may also be true on startup etc
 		{
 			var list=[];
-			
+			list.push(choose([
+				"News : why love someone if you can't have them?",
+				'News : calculus is love, calculus is life!',
+				'News : now I am become death, the destroyer of worlds!',
+				'News : someone lied in april. Not sure who though, yet.',
+				'News : who needs girls when you have cookies?',
+				'News : news looks like this',
+			]));
+			list.push(choose([
+				"News : why love someone if you can't have them?",
+				'News : calculus is love, calculus is life!',
+				'News : now I am become death, the destroyer of worlds!',
+				'News : someone lied in april. Not sure who though, yet.',
+				'News : who needs girls when you have cookies?',
+				'News : news looks like this',
+			]));
+			list.push(choose([
+				"News : why love someone if you can't have them?",
+				'News : calculus is love, calculus is life!',
+				'News : now I am become death, the destroyer of worlds!',
+				'News : someone lied in april. Not sure who though, yet.',
+				'News : who needs girls when you have cookies?',
+				'News : news looks like this',
+			]));
+			list.push(choose([
+				"Once you meet someone, you never really forget them. It just takes a while for your memory to come back to you.",
+				"Once you meet someone, you never really forget them. It just takes a while for your memory to come back to you.",
+				"Once you meet someone, you never really forget them. It just takes a while for your memory to come back to you.",
+				"Once you meet someone, you never really forget them. It just takes a while for your memory to come back to you.",
+				"Promise? I promise.",
+				"Promise? I promise.",
+				"Promise? I promise.",
+			]));
+			list.push(choose([
+				"Once you meet someone, you never really forget them. It just takes a while for your memory to come back to you.",
+				"Once you meet someone, you never really forget them. It just takes a while for your memory to come back to you.",
+				"Once you meet someone, you never really forget them. It just takes a while for your memory to come back to you.",
+				"Once you meet someone, you never really forget them. It just takes a while for your memory to come back to you.",
+				"Promise? I promise.",
+				"Promise? I promise.",
+				"Promise? I promise.",
+			]));
+			list.push(choose([
+				"Why love someone... if you can't have them?",
+				"I miss you...",
+				"News: overweight boy consumes too many cookies, dies.",
+				"We rise."
+			]));
+			list.push(choose([
+				"Why love someone... if you can't have them?",
+				"I miss you...",
+				"News: overweight boy consumes too many cookies, dies.",
+				"We rise.",
+				"Hospitals record balls shaped like your cookies.",
+			]));
+			list.push(choose([
+				"Why love someone... if you can't have them?",
+				"I miss you...",
+				"News: overweight boy consumes too many cookies, dies.",
+				"We rise.",
+				"Hospitals record balls shaped like your cookies.",
+			]));			
 			var NEWS=loc("News :").replace(' ','&nbsp;')+' ';
 			
 			if (Game.TickerN%2==0 || Game.cookiesEarned>=10100000000)
@@ -7019,61 +7080,6 @@ Game.Launch=function()
 					}
 					else
 					{
-						list.push(choose([
-						"News : why love someone if you can't have them?",
-						'News : calculus is love, calculus is life!',
-						'News : now I am become death, the destroyer of worlds!',
-						'News : someone lied in april. Not sure who though, yet.',
-						'News : who needs girls when you have cookies?',
-						'News : news looks like this',
-						]));
-						list.push(choose([
-						"News : why love someone if you can't have them?",
-						'News : calculus is love, calculus is life!',
-						'News : now I am become death, the destroyer of worlds!',
-						'News : someone lied in april. Not sure who though, yet.',
-						'News : who needs girls when you have cookies?',
-						'News : news looks like this',
-						]));
-						list.push(choose([
-						"News : why love someone if you can't have them?",
-						'News : calculus is love, calculus is life!',
-						'News : now I am become death, the destroyer of worlds!',
-						'News : someone lied in april. Not sure who though, yet.',
-						'News : who needs girls when you have cookies?',
-						'News : news looks like this',
-						]));
-						list.push(choose([
-						"Once you meet someone, you never really forget them. It just takes a while for your memory to come back to you.",
-						"Once you meet someone, you never really forget them. It just takes a while for your memory to come back to you.",
-						"Once you meet someone, you never really forget them. It just takes a while for your memory to come back to you.",
-						"Once you meet someone, you never really forget them. It just takes a while for your memory to come back to you.",
-						"Promise? I promise.",
-						"Promise? I promise.",
-						"Promise? I promise.",
-						]));
-						list.push(choose([
-						"Once you meet someone, you never really forget them. It just takes a while for your memory to come back to you.",
-						"Once you meet someone, you never really forget them. It just takes a while for your memory to come back to you.",
-						"Once you meet someone, you never really forget them. It just takes a while for your memory to come back to you.",
-						"Once you meet someone, you never really forget them. It just takes a while for your memory to come back to you.",
-						"Promise? I promise.",
-						"Promise? I promise.",
-						"Promise? I promise.",
-						]));
-						list.push(choose([
-						"Why love someone... if you can't have them?",
-						"I miss you...",
-						"News: overweight boy consumes too many cookies, dies.",
-						"We rise."
-						]));
-						list.push(choose([
-						"Why love someone... if you can't have them?",
-						"I miss you...",
-						"News: overweight boy consumes too many cookies, dies.",
-						"We rise.",
-						"Hospitals record balls shaped like your cookies.",
-						]));
 						if (Game.Objects['Farm'].amount>0) list.push(choose([
 						'News : cookie farms suspected of employing undeclared elderly workforce!',
 						'News : cookie farms release harmful chocolate in our rivers, says scientist!',
