@@ -5690,8 +5690,8 @@ Game.Launch=function()
 				getTimeMod:function(me,m)
 				{
 					m /= 3;
-					if (Game.Has('Lucky day')) m/=1.5;
-					if (Game.Has('Serendipity')) m/=1.5;
+					if (Game.Has('Lucky day')) m *= 0.65;
+					if (Game.Has('Serendipity')) m *= 0.65;
 					if (Game.Has('Golden goose egg')) m*=0.95;
 					if (Game.Has('Heavenly luck')) m*=0.95;
 					if (Game.Has('Green yeast digestives')) m*=0.99;
@@ -9834,7 +9834,7 @@ Game.Launch=function()
 		Game.last.pool='toggle';
 		
 		order=5000;
-		new Game.Upgrade('Get lucky',loc("Golden cookie effects last <b>twice as long</b>.")+'<q>You\'ve been up all night, haven\'t you?</q>',77777777777777,[27,6]);
+		new Game.Upgrade('Get lucky',loc("Golden cookie effects last <b>twice as long</b>.")+'<q>You\'ve been up all night, haven\'t you?</q>',77777777777777777,[27,6]);
 		
 		order=15000;
 		new Game.Upgrade('Sacrificial rolling pins',loc("Elder pledges last <b>twice</b> as long.")+'<q>These are mostly just for spreading the anti-aging cream.<br>(And accessorily, shortening the chicken\'s suffering.)</q>',2888888888888,[2,9]);
