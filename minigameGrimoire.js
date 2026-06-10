@@ -148,8 +148,8 @@ M.launch=function()
 			},
 			'haggler\'s charm':{
 				name:'Haggler\'s Charm',
-				desc:'Upgrades are 2% cheaper for 1 minute.',
-				failDesc:'Upgrades are 2% more expensive for an hour.<q>What\'s that spell? Loadsamoney!</q>',
+				desc:'Upgrades are 25% cheaper for 1 minute.',
+				failDesc:'Upgrades are 50% more expensive for an hour.<q>What\'s that spell? Loadsamoney!</q>',
 				icon:[25,11],
 				costMin:30,
 				costPercent:0.1,
@@ -168,8 +168,8 @@ M.launch=function()
 			},
 			'summon crafty pixies':{
 				name:'Summon Crafty Pixies',
-				desc:'Buildings are 2% cheaper for 1 minute.',
-				failDesc:'Buildings are 2% more expensive for an hour.',
+				desc:'Buildings are 25% cheaper for 1 minute.',
+				failDesc:'Buildings are 50% more expensive for an hour.',
 				icon:[26,11],
 				costMin:32,
 				costPercent:0.2,
