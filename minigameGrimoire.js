@@ -15,7 +15,7 @@ M.launch=function()
 				desc:'Summon 10 minutes worth of your CpS, capped at twice your cookies owned.',
 				failDesc:'Trigger a 10-minute clot and lose 10 minutes of CpS.',
 				icon:[21,11],
-				costMin:3,
+				costMin:20,
 				costPercent:0.2,
 				win:function()
 				{
@@ -39,8 +39,8 @@ M.launch=function()
 				desc:'Summon a random non-blab golden cookie. Each existing golden cookie makes this spell +15% more likely to backfire.',
 				failDesc:'Summon an unlucky wrath cookie.',
 				icon:[22,11],
-				costMin:10,
-				costPercent:0.4,
+				costMin:15,
+				costPercent:0.6,
 				failFunc:function(fail)
 				{
 					return fail+0.15*Game.shimmerTypes['golden'].n;
@@ -80,7 +80,7 @@ M.launch=function()
 				desc:'All active buffs gain 10% more time (up to 5 more minutes).',
 				failDesc:'All active buffs are shortened by 20% (up to 10 minutes shorter).',
 				icon:[23,11],
-				costMin:5,
+				costMin:8,
 				costPercent:0.2,
 				win:function()
 				{
@@ -116,8 +116,8 @@ M.launch=function()
 				desc:'The spell picks a random building you could afford if you had twice your current cookies, and gives it to you for free. The building selected must be under 400, and cannot be your most-built one (unless it is your only one).',
 				failDesc:'Lose a random building.',
 				icon:[24,11],
-				costMin:15,
-				costPercent:0.55,
+				costMin:45,
+				costPercent:0.25,
 				win:function()
 				{
 					var buildings=[];
@@ -151,7 +151,7 @@ M.launch=function()
 				desc:'Upgrades are 2% cheaper for 1 minute.',
 				failDesc:'Upgrades are 2% more expensive for an hour.<q>What\'s that spell? Loadsamoney!</q>',
 				icon:[25,11],
-				costMin:8,
+				costMin:30,
 				costPercent:0.1,
 				win:function()
 				{
@@ -171,7 +171,7 @@ M.launch=function()
 				desc:'Buildings are 2% cheaper for 1 minute.',
 				failDesc:'Buildings are 2% more expensive for an hour.',
 				icon:[26,11],
-				costMin:6,
+				costMin:32,
 				costPercent:0.2,
 				win:function()
 				{
@@ -190,7 +190,7 @@ M.launch=function()
 				name:'Gambler\'s Fever Dream',
 				desc:'Cast a random spell at half the magic cost, with twice the chance of backfiring.',
 				icon:[27,11],
-				costMin:2,
+				costMin:6,
 				costPercent:0.05,
 				win:function()
 				{
@@ -240,8 +240,8 @@ M.launch=function()
 				desc:'Spells do not for the next 5 minutes.',
 				failDesc:'Spells always backfire for the next 10 minutes.',
 				icon:[29,11],
-				costMin:3,
-				costPercent:0.2,
+				costMin:10,
+				costPercent:0.05,
 				win:function()
 				{
 					Game.killBuff('Magic inept');
