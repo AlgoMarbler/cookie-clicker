@@ -49,7 +49,7 @@ M.launch=function()
 				{
 					var newShimmer=new Game.shimmer('golden',{noWrath:true});
 					var choices=[];
-					choices.push('frenzy','multiply cookies', 'supercharge', 'endurance frenzy', 'dragon essence');
+					choices.push('frenzy','multiply cookies', 'supercharge', 'long frenzy', 'dragon essence');
 					choices.push('click frenzy');
 					if (Math.random()<0.25) choices.push('cookie storm','cookie storm');
 					if (Game.BuildingsOwned>=10 && Math.random()<0.25) choices.push('building special');
