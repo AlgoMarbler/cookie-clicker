@@ -5644,7 +5644,7 @@ Game.Launch=function()
             "She'll text back eventually.",
             'Thanks for clicking!',
             'You wish you clicked with her like how you clicked this cookie.',
-            'Golden cookies clicked +1!',
+            'Why... are you here...?',
             'Your click has been registered. Thank you for your cooperation.',
             'Your grandmas hate your balls.',
             'Thanks! That hit the spot!',
@@ -6999,6 +6999,7 @@ Game.Launch=function()
         'News : someone lied in april. Not sure who though, yet.',
         'News : who needs girls when you have cookies?',
         'News : news looks like this',
+        "Why... are you here...?",
       ]));
       list.push(choose([
         "News : why love someone if you can't have them?",
@@ -7007,6 +7008,7 @@ Game.Launch=function()
         'News : someone lied in april. Not sure who though, yet.',
         'News : who needs girls when you have cookies?',
         'News : news looks like this',
+        "Why... are you here...?",
       ]));
       list.push(choose([
         "Once you meet someone, you never really forget them. It just takes a while for your memory to come back to you.",
@@ -7016,6 +7018,7 @@ Game.Launch=function()
         "Promise? I promise.",
         "Promise? I promise.",
         "Promise? I promise.",
+        "Why... are you here...?",
       ]));
       list.push(choose([
         "Once you meet someone, you never really forget them. It just takes a while for your memory to come back to you.",
